@@ -39,7 +39,7 @@ MongoDB Compass
 Postman
 ```
 
-## Arborsence
+## Arborescence
 ```
 Blackpearl
     |- static
