@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<body>
+{% extends 'main.html' %}
+{% block content %}
+
+    <section class="container table-responsive">
+        <div id="piechart"></div>
+        <table style="width:50% " class="table displayTable">
+            <tr>
+                <th scope="col">States</th>
+                <th scope="col">Harmless</th>
+                <th scope="col">malicious</th>
+                <th scope="col">Suspicious</th>
+                <th scope="col">Timeout</th>
+                <th scope="col">Undetected</th>
+            </tr>
+            <tr>
+                <th scope="row">vectors</th>
+                <td style="color: green;">{{ result['last_analysis_stats']['harmless'] }}</td>
+                <td style="color: darkred;">{{ result['last_analysis_stats']['malicious'] }}</td>
+                <td style="color: red;">{{ result['last_analysis_stats']['suspicious'] }}</td>
+                <td style="color: darkorange;">{{ result['last_analysis_stats']['timeout'] }}</td>
+                <td style="color: dimgrey;">{{ result['last_analysis_stats']['undetected'] }}</td>
+            </tr>
+        </table>
+    </section>
+    <section class="container table-responsive">
+        <table style="width:100% " class="table displayTable">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Execution date</th>
+                <th scope="col">IP</th>
+                <th scope="col">Country</th>
+                <th scope="col">Continent</th>
+                <th scope="col">Regional Internet Registry</th>
+                <th scope="col">Who is Lookup</th>
+
+            </tr>
+
+            <tr>
+                <th scope="row">Basic Info</th>
+                <td>{{ result['exec_date'] }}</td>
+                <td>{{ result['ip'] }}</td>
+                <td>{{ result['country'] }}</td>
+                <td>{{ result['continent'] }}</td>
+                <td>{{ result['regional_internet_registry'] }}</td>
+                <td>{{ result['whois'] }}</td>
+            </tr>
+
+        </table>
+    </section>
+    <section class="container table-responsive">
+        <table style="width:50% " class="table displayTable">
+            <tr>
+                <th scope="col">Scan Analytics</th>
+                <th scope="col">State</th>
+            </tr>
+            <tr>
+                {% for k,v in result['last_analysis_results'].items() %}
+                    <tr>
+                        <td>{{ k }}</td>
+                        {% if v == 'clean' %}
+                            <td style="color: limegreen">{{ v }}</td>
+                        {% else %}
+                            <td style="color: grey">{{ v }}</td>
+                            </tr>
+                        {% endif %}
+
+                {% endfor %}
+            </tr>
+        </table>
+    </section>
+
+{% endblock %}
+
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['State', 'Exploitability'],
+            ['harmless', {{ result['last_analysis_stats']['harmless'] }}],
+            ['suspicious', {{ result['last_analysis_stats']['suspicious'] }}],
+            ['timeout', {{ result['last_analysis_stats']['timeout'] }}],
+            ['undetected', {{ result['last_analysis_stats']['undetected'] }}]
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title': 'My Average Day', 'width': 550, 'height': 400};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+</script>
+<div class="no-print" style="margin-top:50px;">
+    <button id="btnPrint" class="btn btn-dark btnPrintPDF">imprimer en PDF</button>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#btnPrint").on("click", function () {
+            window.onafterprint = function () {
+                console.log("onafterprint function fired");
+
+            };
+            window.print();
+        });
+    });
+</script>
+
+
+</body>
+</html>

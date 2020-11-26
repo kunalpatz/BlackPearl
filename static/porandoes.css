@@ -1,0 +1,122 @@
+/*MainNavbar*/
+body{
+	font-family: "Nunito", sans-serif;
+	font-weight: 400;
+}
+/*#mainNavbar .nav-link {
+    color: white;
+}*/
+#mainNavbar .nav-link:hover {
+    color: ghostwhite;
+}
+#mainNavbar .navbar-brand {
+    color: ghostwhite;
+}
+.navbar{
+	background:black;
+}
+.navbar.scrolled {
+    background: rgb(0,0,0);
+    transition: background 500ms;
+    /*padding-top:0;*/
+}
+.navbar-light .navbar-toggler{
+	border: none;
+}
+
+
+/*Jumbotron*/
+.jumbotron{
+	/*background-image: url(imgs/title1.jpg);*/
+	background-size: initial;
+	background-position: center;
+	color: white;
+	background: rgb(50,50,50)
+}
+
+
+/*Card Design*/
+.card-body{
+	padding-left:1.25rem;
+	/*padding-top:.7rem;
+	padding-bottom:.5rem;*/
+
+}
+
+.displayTable{
+  font-size: 13px;
+  }
+  .infoCard{
+    font-size: .9rem
+  }
+  .infoCardBody{
+    font-size: .8rem
+  }
+.displayCard{
+	font-size:.8rem;
+	/*height: 325px;	*/
+}
+.btnPrintPDF{
+    margin-left: 45%;
+    margin-bottom:5px;
+  }
+ .btn-light{
+ 	margin-top: 1.8rem
+ }
+
+.circle-progressbar {
+    transform: rotate(-90deg);
+    position: relative;
+    top: -90px;
+    left: -10px;
+    stroke-linecap: round;
+    transition: all 0.5s ease-in-out;
+}
+.mainPreview {
+	margin-bottom: 3rem;
+
+}
+.mainPreview hr{
+	border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin-left:10%;
+    margin-right:5%;
+    margin-top:.5rem;
+    margin-bottom:.5rem;
+
+
+}
+.mainPreview .titleTag{
+	font-size: 1.5rem;
+}
+.mainPreview .viewAll{
+	float: right;
+}
+.card-title{
+	color: #EA1C2C;
+}
+.card-text{
+	font-size: .9rem;
+	margin-bottom: .7rem;
+	display:block;
+  	height:2.5rem;
+  	overflow:hidden !important;
+
+}
+
+.form_control_main{
+	width: 40%;
+}
+
+
+body{
+	overflow-x: hidden
+}
+@media(max-width: 600px){
+	.displayCard{
+	font-size:.8rem;
+	/*height: 300px;	*/
+}
+}

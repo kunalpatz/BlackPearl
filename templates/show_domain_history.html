@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+{% extends 'main.html' %}
+{% block content %}
+
+    <section class="container table-responsive">
+        <table style="width:100% " class="table displayTable">
+            <tr>
+                <th scope="col">Execution Date</th>
+                <th scope="col">Domain</th>
+                <th scope="col">Registrar</th>
+                <th scope="col">States</th>
+            </tr>
+            <tr>
+                {% for data in result %}
+                    <tr>
+                    <td>{{ data['exec_date']['$date'] }}</td>
+                    <td><a href="{{ url_for('show_domain_details', domain=data['domain']) }}">{{ data['domain'] }}</a>
+                    </td>
+                    <td>{{ data['registrar'] }}</td>
+                    <td><p style="color: green;">Harmless: {{ data['last_analysis_stats']['harmless'] }}
+                        <p style="color: darkred;">Malicious: {{ data['last_analysis_stats']['malicious'] }}
+                        <p style="color: red;">Suspicious: {{ data['last_analysis_stats']['suspicious'] }}
+                        <p style="color: darkorange;">Timeout: {{ data['last_analysis_stats']['timeout'] }}
+                        <p style="color: dimgrey;">Undetected: {{ data['last_analysis_stats']['undetected'] }}
+                    </td>
+
+                    <th>
+                        <button><a href="{{ url_for('delete', id=data['_id']['$oid']) }}">delete</a></button>
+                    </th>
+                {% endfor %}
+                </tr>
+        </table>
+    </section>
+{% endblock %}
+<script>
+    $(document).on('click', '.btn', function () {
+
+        var name = $(this).data('ip');
+        window.location = '/details?ip=' + name;
+    });
+</script>
+</body>
+</html>
