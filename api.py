@@ -25,7 +25,7 @@ def domain(domain):
     api = "https://www.virustotal.com/api/v3/domains/" + domain
     headers = {
         'Authorization': 'Basic Og==',
-        'x-apikey': 'f89511d1bcad3dd6743e4b8fc898fe1f872c3c4f2b19de7310ba8cd0c5150479'
+        'x-apikey': '<your apikey>'
     }
     payload = {}
     response_url = requests.request("GET", api, headers=headers, data=payload)
